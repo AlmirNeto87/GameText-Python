@@ -1,6 +1,6 @@
 import json
 import random
-from modules.personagem import salvar_personagem, calcular_vida_mana
+from modules.personagem import salvar_personagem, calcular_vida_mana, deletar_personagem
 
 # Função para carregar monstros
 def carregar_monstros():
@@ -23,7 +23,7 @@ def batalha_turnos(personagem):
     monstro = random.choice(monstros_disponiveis)
     print(f"\nUm {monstro['nome']} apareceu!")
     print(f"Vida: {monstro['vida']} | Ataque: {monstro['ataque']} | Defesa: {monstro['defesa']}")
-
+    monstro_vida = monstro["vida"]
     while personagem["vida"] > 0 and monstro["vida"] > 0:
         print(f"\n--- Turno de {personagem['nome']} ---")
         print("1. Atacar")
@@ -32,8 +32,10 @@ def batalha_turnos(personagem):
 
         if acao == "1":
             dano = max(0, personagem["atributos"]["forca"] - monstro["defesa"])
+            
             monstro["vida"] -= dano
             print(f"Você causou {dano} de dano no {monstro['nome']}!")
+            print(f"Vida do {monstro['nome']} {monstro['vida']}")
         elif acao == "2":
             print("Você defendeu!")
         else:
@@ -43,7 +45,7 @@ def batalha_turnos(personagem):
         if monstro["vida"] <= 0:
             print(f"\nVocê derrotou o {monstro['nome']} e ganhou {monstro['xp']} XP!")
             personagem["xp"] += monstro["xp"]
-
+            monstro["vida"] = monstro_vida  # Resetar vida do monstro para futuras batalhas
             # Verificar subida de nível
             while personagem["xp"] >= 100:
                 subir_nivel(personagem)
@@ -61,4 +63,6 @@ def batalha_turnos(personagem):
         salvar_personagem(personagem)
     
     if personagem["vida"] <= 0:
+        monstro["vida"] = monstro_vida  # Resetar vida do monstro para futuras batalhas
+        deletar_personagem(personagem)
         print("\nVocê foi derrotado...")

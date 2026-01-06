@@ -1,0 +1,17 @@
+{
+    "nome": "ze",
+    "raca": "Humano",
+    "classe": "Guerreiro",
+    "nivel": 12,
+    "xp": 50,
+    "vida": 142,
+    "mana": 78,
+    "atributos": {
+        "forca": 11,
+        "destreza": 9,
+        "constituicao": 11,
+        "inteligencia": 9,
+        "sabedoria": 9,
+        "carisma": 9
+    }
+}

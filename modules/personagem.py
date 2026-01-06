@@ -3,7 +3,7 @@ import os
 
 # Função para carregar dados de raças e classes
 def carregar_dados():
-    with open("/data/data_raca_classes.json", "r") as f:
+    with open("data/data_raca_classes.json", "r") as f:
         return json.load(f)
 
 # Função para calcular vida e mana
@@ -61,7 +61,7 @@ def salvar_personagem(personagem):
     arquivo = f"data/{personagem['nome'].lower().replace(' ', '_')}_personagem.json"
     with open(arquivo, "w") as f:
         json.dump(personagem, f, indent=4)
-    print(f"\nPersonagem salvo no arquivo '{arquivo}'.")
+#       print(f"\nPersonagem salvo no arquivo '{arquivo}'.")
 
 # Função para carregar um personagem salvo
 def carregar_personagem():
@@ -80,3 +80,14 @@ def carregar_personagem():
     print("\n=== Ficha do Personagem ===")
     print(json.dumps(personagem, indent=4))
     return personagem
+
+def deletar_personagem(personagem):
+    arquivos = [f for f in os.listdir("data") if f.endswith("_personagem.json")]
+    if not arquivos:
+        print("\nNenhum personagem salvo encontrado.")
+        return
+    
+    arquivo_alvo = f"{personagem['nome'].lower().replace(' ', '_')}_personagem.json"
+    if arquivo_alvo in arquivos:
+        os.remove(f"data/{arquivo_alvo}")
+        print(f"\nPersonagem '{personagem['nome']}' deletado com sucesso.")

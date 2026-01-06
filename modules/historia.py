@@ -3,7 +3,7 @@ from modules.combate import batalha_turnos
 # Função para o modo história
 def modo_historia(personagem):
     print("\n=== Modo História ===")
-    print("Você está em uma bifurcação.")
+    print(f"Você está em uma bifurcação. {personagem["classe"]} {personagem["nome"] } ")
     print("1. Entrar na caverna.")
     print("2. Seguir pela estrada.")
     print("3. Descansar e recuperar vida.")
