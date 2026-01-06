@@ -3,7 +3,7 @@ import os
 
 # Função para carregar dados de raças e classes
 def carregar_dados():
-    with open("data/data_racas_classes.json", "r") as f:
+    with open("/data/data_raca_classes.json", "r") as f:
         return json.load(f)
 
 # Função para calcular vida e mana
